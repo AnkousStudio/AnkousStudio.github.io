@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resistance - Ankous Studio</title>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+body {
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+  color: white;
+  overflow-x: hidden;
+}
+
+header {
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  padding:15px 40px;
+  background: rgba(0,0,0,0.8);
+  position: sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter: blur(10px);
+}
+
+header img { height:50px; }
+header h1 { color:#00aaff; margin-left:10px; font-size:24px; }
+
+nav a { margin-left:25px; text-decoration:none; color:#fff; font-weight:500; transition:color 0.3s; }
+nav a:hover { color:#00aaff; }
+
+.main-content { padding:80px 40px; max-width:1200px; margin:0 auto; }
+
+.project-title { font-size:2.5rem; text-align:center; margin-bottom:20px; }
+.project-description { font-size:1.2rem; text-align:center; opacity:0.85; margin-bottom:40px; }
+
+.gallery {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+}
+
+.main-image {
+  width:100%;
+  max-width:700px;
+  border-radius:20px;
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform 0.3s;
+}
+
+.main-image img { width:100%; display:block; }
+.main-image:hover { transform: scale(1.03); }
+
+.thumbnails {
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+  flex-wrap: wrap;
+  justify-content:center;
+}
+
+.thumbnails img {
+  width:80px;
+  height:60px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.thumbnails img:hover { transform: scale(1.1); box-shadow:0 0 15px #00aaff55; }
+
+/* Lightbox / Modal */
+#lightbox {
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 0.3s;
+  z-index:999;
+}
+
+#lightbox.active { opacity:1; pointer-events:auto; }
+
+#lightbox img {
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+}
+
+#close-lightbox {
+  position:absolute;
+  top:30px; right:30px;
+  font-size:40px;
+  color:#00aaff;
+  cursor:pointer;
+  transition: color 0.3s;
+}
+
+#close-lightbox:hover { color:#fff; }
+
+.download-btn {
+  display:block;
+  margin:40px auto 0;
+  padding:15px 40px;
+  background:#00aaff;
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:1.2rem;
+  text-align:center;
+  transition: background 0.3s;
+}
+
+.download-btn:hover { background:#0088cc; }
+
+footer {
+  text-align:center;
+  padding:20px;
+  opacity:0.7;
+  font-size:0.9rem;
+  background:#000;
+}
+
+@media(max-width:900px){
+  .thumbnails img { width:60px; height:45px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex; align-items:center;">
+    <img src="logo.png" alt="Logo">
+    <h1>Ankous Studio</h1>
+  </div>
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+  </nav>
+</header>
+
+<div class="main-content">
+  <h2 class="project-title">Resistance</h2>
+  <p class="project-description">2D pixel art mobil oyun. Oyuncular zorlu seviyelerde direnç göstererek ilerlemeye çalışıyor.</p>
+
+  <div class="gallery">
+    <div class="main-image" id="mainImage">
+      <img src="resistance_main.png" alt="Resistance Ana Görsel">
+    </div>
+    <div class="thumbnails">
+      <img src="resistance_thumb1.png" alt="Thumbnail 1">
+      <img src="resistance_thumb2.png" alt="Thumbnail 2">
+      <img src="resistance_thumb3.png" alt="Thumbnail 3">
+    </div>
+  </div>
+
+  <a href="files/resistance.rar" download class="download-btn">İndir</a>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <span id="close-lightbox">&#10006;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<footer>
+  © 2025 Ankous Studio
+</footer>
+
+<script>
+// Lightbox aç/kapat
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const mainImage = document.getElementById("mainImage");
+
+mainImage.addEventListener("click", () => {
+  lightbox.classList.add("active");
+  lightboxImg.src = mainImage.querySelector("img").src;
+});
+
+document.getElementById("close-lightbox").addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
+
+// Thumbnail click
+document.querySelectorAll(".thumbnails img").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    mainImage.querySelector("img").src = thumb.src;
+  });
+});
+</script>
+
+</body>
+</html>
