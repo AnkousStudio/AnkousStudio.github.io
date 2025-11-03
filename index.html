@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ankous Studio</title>
-  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo.png">
   <style>
     body {
       margin: 0;
@@ -26,8 +27,20 @@
       backdrop-filter: blur(10px);
     }
 
+    header .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     header img {
       height: 50px;
+    }
+
+    header .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00aaff;
     }
 
     nav a {
@@ -136,7 +149,10 @@
 </head>
 <body>
   <header>
-    <img src="logo.png" alt="Ankous Studio Logo">
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Ankous Studio Logo">
+      <div class="logo-text">Ankous Studio</div>
+    </div>
     <nav>
       <a href="#projects">Projelerimiz</a>
       <a href="#about">Hakkımızda</a>
@@ -153,43 +169,43 @@
     <h2>Projelerimiz</h2>
     <div class="project-grid">
       <div class="project" onclick="window.open('resistance.html','_blank')">
-        <img src="resistance.png" alt="Resistance">
+        <img src="images/resistance.png" alt="Resistance">
         <h3>Resistance</h3>
         <p>2D pixel art mobil oyun</p>
       </div>
 
       <div class="project" onclick="window.open('kulyas.html','_blank')">
-        <img src="kulyas.png" alt="Kulyas">
+        <img src="images/kulyas.png" alt="Kulyas">
         <h3>Kulyas</h3>
         <p>3D korku-gerilim</p>
       </div>
 
       <div class="project" onclick="window.open('codescaper.html','_blank')">
-        <img src="codescaper.png" alt="Codescaper">
+        <img src="images/codescaper.png" alt="Codescaper">
         <h3>Codescaper</h3>
         <p>3D korku-gerilim</p>
       </div>
 
       <div class="project" onclick="window.open('phonerun.html','_blank')">
-        <img src="phonerun.png" alt="PhoneRun">
+        <img src="images/phonerun.png" alt="PhoneRun">
         <h3>PhoneRun</h3>
         <p>3D mobil runner oyun</p>
       </div>
 
       <div class="project" onclick="window.open('companytycoon.html','_blank')">
-        <img src="companytycoon.png" alt="CompanyTycoon">
+        <img src="images/companytycoon.png" alt="CompanyTycoon">
         <h3>Company Tycoon</h3>
         <p>3D mobil tycoon oyunu</p>
       </div>
 
       <div class="project" onclick="window.open('nightfall.html','_blank')">
-        <img src="nightfall.png" alt="NightFall">
+        <img src="images/nightfall.png" alt="NightFall">
         <h3>NightFall</h3>
         <p>Modlu Minecraft sunucusu</p>
       </div>
 
       <div class="project" onclick="window.open('plannet.html','_blank')">
-        <img src="plannet.png" alt="PlanNet">
+        <img src="images/plannet.png" alt="PlanNet">
         <h3>PlanNet</h3>
         <p>Ghosting özelliğine sahip bilgisayar uygulaması</p>
       </div>
