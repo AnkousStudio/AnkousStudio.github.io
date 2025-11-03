@@ -251,7 +251,7 @@ function showImage(index){
   },150);
 }
 
-// Lightbox
+// Lightbox (sadece ana görsel için)
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightbox-image");
 const lightboxClose = document.getElementById("lightbox-close");
@@ -259,13 +259,6 @@ const lightboxClose = document.getElementById("lightbox-close");
 projectImage.addEventListener("click", ()=>{
   lightbox.style.display = "flex";
   lightboxImage.src = projectImage.src;
-});
-
-document.querySelectorAll('.thumbnail-bar img').forEach(img=>{
-  img.addEventListener("click", ()=>{
-    lightbox.style.display = "flex";
-    lightboxImage.src = img.src;
-  });
 });
 
 lightboxClose.addEventListener("click", ()=>{
