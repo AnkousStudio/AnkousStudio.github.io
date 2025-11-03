@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ankous Studio</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:#0b0c10; color:#c5c6c7; overflow-x:hidden; scroll-behavior:smooth; }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; scroll-behavior:smooth; }
+body { background:#0b0c10; color:#c5c6c7; overflow-x:hidden; }
 
 header {
   position:sticky;
@@ -64,7 +64,7 @@ nav a:hover { color:#66fcf1; }
 .project-card p { font-size:15px; color:#c5c6c7; }
 
 #project-display {
-  display:none; /* site açıldığında görünmez */
+  display:none;
   justify-content:center;
   align-items:flex-start;
   padding:50px;
@@ -127,6 +127,11 @@ footer { background:#0b0c10; padding:30px; text-align:center; color:#c5c6c7; fon
 footer span { color:#66fcf1; }
 
 @media(max-width:900px){ #project-display { flex-direction:column; align-items:center; } .left,.right{ width:90%; } }
+
+/* Menü smooth scroll animasyonu */
+html {
+  scroll-behavior: smooth;
+}
 </style>
 </head>
 <body>
@@ -186,13 +191,13 @@ footer span { color:#66fcf1; }
 
 <script>
 const projects=[
-{name:"Resistance", description:"2D pixel art mobil oyun.", images:["images/resistance.png"], file:"files/resistance.rar"},
-{name:"Kulyas", description:"3D korku-gerilim oyunu.", images:["images/kulyas.png"], file:"files/kulyas.zip"},
-{name:"Codescaper", description:"3D korku-gerilim oyunu.", images:["images/codescaper.png"], file:"files/codescaper.rar"},
-{name:"PhoneRun", description:"3D mobil runner oyunu.", images:["images/phonerun.png"], file:"files/phonerun.rar"},
-{name:"CompanyTycoon", description:"3D mobil şirket yönetme-geliştirme oyunu.", images:["images/companytycoon.png"], file:"files/companytycoon.rar"},
-{name:"NightFall", description:"Modlu Minecraft sunucusu.", images:["images/nightfall.png"], file:"files/nightfall.rar"},
-{name:"PlanNet", description:"Görselleri ekranda kitleyebileceğiniz bilgisayar uygulaması.", images:["images/plannet.png"], file:"files/PlanNet.rar"}
+{name:"Resistance", shortDesc:"2D pixel art mobil oyun.", description:"Resistance, 2D piksel tarzında aksiyon dolu bir mobil oyundur. Oyuncular zombi istilasına uğramış bir dünyada hayatta kalmaya çalışır.", images:["images/resistance.png"], file:"files/resistance.rar"},
+{name:"Kulyas", shortDesc:"Korku-gerilim oyunu.", description:"Kulyas, karanlık atmosferiyle dikkat çeken 3D korku-gerilim oyunudur. Gizemli bir köyde geçen hikayesiyle tüyler ürpertir.", images:["images/kulyas.png"], file:"files/kulyas.zip"},
+{name:"Codescaper", shortDesc:"Zihin bulmacalı korku oyunu.", description:"Codescaper, zekâ ve korkunun birleştiği bir deneyim sunar. Oyuncular kodlar ve ipuçlarıyla çıkış yolunu bulmak zorundadır.", images:["images/codescaper.png"], file:"files/codescaper.rar"},
+{name:"PhoneRun", shortDesc:"Mobil 3D runner oyunu.", description:"PhoneRun, reflekslerinizi test eden hızlı tempolu bir 3D koşu oyunudur. Engellerden kaçın ve puan rekorunu kır!", images:["images/phonerun.png"], file:"files/phonerun.rar"},
+{name:"CompanyTycoon", shortDesc:"Şirket geliştirme simülasyonu.", description:"Company Tycoon, kendi şirketinizi kurup büyütebileceğiniz eğlenceli bir mobil simülasyon oyunudur.", images:["images/companytycoon.png"], file:"files/companytycoon.rar"},
+{name:"NightFall", shortDesc:"Minecraft sunucusu.", description:"NightFall, modlu Minecraft sunucusudur. Korku, macera ve hayatta kalma unsurlarını harmanlayan özel bir deneyim sunar.", images:["images/nightfall.png"], file:"files/nightfall.rar"},
+{name:"PlanNet", shortDesc:"Görselleri sabitleme uygulaması.", description:"PlanNet, ekranınızdaki görselleri sabitleyip düzenlemenizi sağlayan bir masaüstü aracıdır.", images:["images/plannet.png"], file:"files/PlanNet.rar"}
 ];
 
 const projectsList=document.getElementById("projects-list");
@@ -209,7 +214,7 @@ let selectedCard=null;
 projects.forEach((proj,index)=>{
   const card=document.createElement("div");
   card.className="project-card";
-  card.innerHTML=`<img src="${proj.images[0]}" alt="${proj.name}"><h3>${proj.name}</h3><p>${proj.description}</p>`;
+  card.innerHTML=`<img src="${proj.images[0]}" alt="${proj.name}"><h3>${proj.name}</h3><p>${proj.shortDesc}</p>`;
   card.onclick=()=>{
     showProject(index);
     if(selectedCard) selectedCard.classList.remove("selected");
@@ -263,5 +268,3 @@ function prevImage(){
 </script>
 </body>
 </html>
-
-
