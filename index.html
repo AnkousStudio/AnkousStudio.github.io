@@ -1,275 +1,231 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ankous Studio</title>
-<link rel="icon" href="images/logo.png" type="image/png">
-<style>
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:#0b0c10; color:#c5c6c7; overflow-x:hidden; scroll-behavior:smooth; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ankous Studio</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+      color: white;
+      overflow-x: hidden;
+    }
 
-header {
-  position:sticky;
-  top:0;
-  background:#1f2833;
-  padding:15px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 2px 10px rgba(0,0,0,0.3);
-  z-index:1000;
-}
-header h1 { color:#66fcf1; font-size:26px; display:flex; align-items:center; gap:10px; }
-header h1 img { width:40px; height:40px; object-fit:contain; }
-nav a { color:#c5c6c7; margin-left:25px; text-decoration:none; font-weight:500; transition:color 0.3s; }
-nav a:hover { color:#66fcf1; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(0, 0, 0, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
 
-.hero {
-  text-align:center;
-  padding:120px 20px;
-  background:#0b0c10;
-}
-.hero h2 { color:#66fcf1; font-size:42px; margin-bottom:15px; }
-.hero p { font-size:18px; color:#c5c6c7; max-width:700px; margin:0 auto; line-height:1.6; }
+    header img {
+      height: 50px;
+    }
 
-.projects-section {
-  text-align:center;
-  padding:80px 20px;
-  background:linear-gradient(180deg, #1a1a1a 0%, #121212 100%);
-}
-.projects-section h2 { color:#66fcf1; font-size:36px; margin-bottom:40px; }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
 
-.projects-container {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px;
-  width:90%;
-  margin:0 auto;
-}
+    nav a:hover {
+      color: #00aaff;
+    }
 
-.project-card {
-  background:#1f2833;
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.3);
-  transition:all 0.3s ease;
-  cursor:pointer;
-  overflow:hidden;
-  position:relative;
-}
-.project-card.selected { outline:3px solid #66fcf1; }
-.project-card:hover { transform:scale(1.05); box-shadow:0 8px 20px rgba(0,0,0,0.5); }
-.project-card img { width:100%; height:150px; object-fit:cover; border-radius:12px; margin-bottom:15px; }
-.project-card h3 { color:#66fcf1; margin-bottom:8px; }
-.project-card p { font-size:15px; color:#c5c6c7; }
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: radial-gradient(circle at center, #222 0%, #111 80%);
+      text-align: center;
+    }
 
-#project-display {
-  display:none;
-  justify-content:center;
-  align-items:flex-start;
-  padding:50px;
-  gap:50px;
-  max-width:1200px;
-  margin:30px auto;
-  position:relative;
-  flex-wrap:wrap;
-  transform: translateY(-50px);
-  opacity:0;
-  pointer-events:none;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-}
-#project-display.active {
-  display:flex;
-  transform: translateY(0);
-  opacity:1;
-  pointer-events:auto;
-}
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
 
-.left { position:relative; width:100%; max-width:500px; }
-.image-box {
-  width:100%;
-  height:400px;
-  background:#1f2833;
-  border-radius:15px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-  box-shadow:0 4px 15px rgba(0,0,0,0.5);
-}
-.image-box img { width:100%; height:100%; object-fit:cover; border-radius:12px; transition:transform 0.5s ease; }
-.arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:40px; color:#66fcf1; cursor:pointer; user-select:none; background:rgba(11,12,16,0.5); padding:10px; border-radius:50%; transition:background 0.3s; }
-.arrow:hover { background:rgba(102,252,241,0.7); }
-.arrow-left { left:10px; }
-.arrow-right { right:10px; }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
 
-.right { flex:1; display:flex; flex-direction:column; justify-content:space-between; min-width:300px; }
-.description h2 { color:#66fcf1; font-size:32px; margin-bottom:20px; }
-.description p { font-size:16px; line-height:1.6; }
+    section {
+      padding: 100px 60px;
+    }
 
-.close-btn { position:absolute; top:0; right:0; font-size:40px; color:#66fcf1; cursor:pointer; background:rgba(11,12,16,0.5); padding:10px; border-radius:50%; transform:translate(50%, -50%); transition:background 0.3s; }
-.close-btn:hover { background:rgba(102,252,241,0.7); }
+    h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.2rem;
+    }
 
-.about, .contact {
-  background:linear-gradient(180deg, #1c1c1c 0%, #161616 100%);
-  padding:60px 20px;
-  text-align:center;
-}
-.about h2, .contact h2 { color:#66fcf1; font-size:34px; margin-bottom:20px; }
-.about p, .contact p { font-size:17px; color:#c5c6c7; max-width:800px; margin:10px auto; line-height:1.7; }
-.contact a { color:#66fcf1; text-decoration:none; }
+    /* Projeler Alanı */
+    .projects {
+      background: linear-gradient(to bottom, #1a1a1a, #111);
+    }
 
-footer { background:#0b0c10; padding:30px; text-align:center; color:#c5c6c7; font-size:14px; }
-footer span { color:#66fcf1; }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
 
-@media(max-width:900px){ #project-display { flex-direction:column; align-items:center; } .left,.right{ width:90%; } }
-</style>
+    .project {
+      background: #181818;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .project:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00aaff55;
+    }
+
+    .project img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .project h3 {
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    /* Hakkımızda */
+    .about {
+      background: linear-gradient(to bottom, #111, #0a0a0a);
+      text-align: center;
+    }
+
+    /* İletişim */
+    .contact {
+      background: linear-gradient(to bottom, #0a0a0a, #000);
+      text-align: center;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: #000;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+  </style>
 </head>
 <body>
-<header>
-<h1><img src="images/logo.png" alt="Logo"> Ankous Studio</h1>
-<nav>
-<a href="#home">Ana Sayfa</a>
-<a href="#projects">Projeler</a>
-<a href="#about">Hakkımızda</a>
-<a href="#contact">İletişim</a>
-</nav>
-</header>
+  <header>
+    <img src="logo.png" alt="Ankous Studio Logo">
+    <nav>
+      <a href="#projects">Projelerimiz</a>
+      <a href="#about">Hakkımızda</a>
+      <a href="#contact">İletişim</a>
+    </nav>
+  </header>
 
-<section class="hero" id="home">
-<h2>Birçok alanda farklı içeriklerle karşınızdayız!</h2>
-<p>Ankous Studio, yenilikçi oyunlar ve teknolojik çözümler geliştiren bağımsız bir yazılım stüdyosudur.</p>
-</section>
+  <section class="hero">
+    <h1>ANKOUS STUDIO</h1>
+    <p>Bağımsız oyun ve yazılım geliştirme stüdyosu</p>
+  </section>
 
-<section class="projects-section" id="projects">
-<h2>Projelerimiz</h2>
-<div class="projects-container" id="projects-list"></div>
-</section>
+  <section id="projects" class="projects">
+    <h2>Projelerimiz</h2>
+    <div class="project-grid">
+      <div class="project" onclick="window.open('resistance.html','_blank')">
+        <img src="resistance.png" alt="Resistance">
+        <h3>Resistance</h3>
+        <p>2D pixel art mobil oyun</p>
+      </div>
 
-<div id="project-display">
-  <span class="close-btn" onclick="closeProject()">&#8679;</span>
-  <div class="left">
-    <div class="image-box">
-      <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
-      <img id="project-image" src="" alt="">
-      <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
+      <div class="project" onclick="window.open('kulyas.html','_blank')">
+        <img src="kulyas.png" alt="Kulyas">
+        <h3>Kulyas</h3>
+        <p>3D korku-gerilim</p>
+      </div>
+
+      <div class="project" onclick="window.open('codescaper.html','_blank')">
+        <img src="codescaper.png" alt="Codescaper">
+        <h3>Codescaper</h3>
+        <p>3D korku-gerilim</p>
+      </div>
+
+      <div class="project" onclick="window.open('phonerun.html','_blank')">
+        <img src="phonerun.png" alt="PhoneRun">
+        <h3>PhoneRun</h3>
+        <p>3D mobil runner oyun</p>
+      </div>
+
+      <div class="project" onclick="window.open('companytycoon.html','_blank')">
+        <img src="companytycoon.png" alt="CompanyTycoon">
+        <h3>Company Tycoon</h3>
+        <p>3D mobil tycoon oyunu</p>
+      </div>
+
+      <div class="project" onclick="window.open('nightfall.html','_blank')">
+        <img src="nightfall.png" alt="NightFall">
+        <h3>NightFall</h3>
+        <p>Modlu Minecraft sunucusu</p>
+      </div>
+
+      <div class="project" onclick="window.open('plannet.html','_blank')">
+        <img src="plannet.png" alt="PlanNet">
+        <h3>PlanNet</h3>
+        <p>Ghosting özelliğine sahip bilgisayar uygulaması</p>
+      </div>
     </div>
-  </div>
-  <div class="right">
-    <div class="description">
-      <h2 id="project-title"></h2>
-      <p id="project-desc"></p>
-    </div>
-  </div>
-</div>
+  </section>
 
-<section class="about" id="about">
-<h2>Hakkımızda</h2>
-<p>22 Haziran 2022 tarihinde <strong>Ozan Aslan</strong> ve <strong>Utkan Alkan</strong> tarafından kurulan Ankous Studio, oyun geliştirme amacıyla kurulmuş bağımsız bir yazılım ve oyun geliştirme şirketidir.</p>
-<p>Oyun geliştirme dünyasında ilerlemek isteyen geliştiricilere destek sağlıyoruz.</p>
-</section>
+  <section id="about" class="about">
+    <h2>Hakkımızda</h2>
+    <p>Ankous Studio, 22.06.2022 tarihinde <b>Ozan Aslan</b> ve <b>Utkan Alkan</b> tarafından kurulmuştur. 
+      Bağımsız bir oyun ve yazılım geliştirme stüdyosu olarak sadece kendi projelerimizi değil, 
+      aynı zamanda oyun geliştirmek isteyenlere de destek sunuyoruz.</p>
+  </section>
 
-<section class="contact" id="contact">
-<h2>İletişim</h2>
-<p>Her türlü soru ve işbirliği için bize ulaşabilirsiniz:</p>
-<p><strong>Email:</strong> <a href="mailto:AnkousGames@gmail.com">AnkousGames@gmail.com</a></p>
-</section>
+  <section id="contact" class="contact">
+    <h2>İletişim</h2>
+    <p>Bizimle iletişime geçmek için: <b>AnkousGames@gmail.com</b></p>
+  </section>
 
-<footer>
-© 2025 <span>Ankous Studio</span> | Tüm Hakları Saklıdır.
-</footer>
+  <footer>
+    © 2025 Ankous Studio. Tüm hakları saklıdır.
+  </footer>
 
-<script>
-// Projeler
-const projects=[
-{name:"Resistance", description:"2D pixel art mobil oyun.", images:["images/resistance.png"], file:"files/resistance.rar", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"Kulyas", description:"3D korku-gerilim oyunu.", images:["images/kulyas.png"], file:"files/kulyas.zip", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"Codescaper", description:"3D korku-gerilim oyunu.", images:["images/codescaper.png"], file:"files/codescaper.rar", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"PhoneRun", description:"3D mobil runner oyunu.", images:["images/phonerun.png"], file:"files/phonerun.rar", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"CompanyTycoon", description:"3D mobil şirket yönetme-geliştirme oyunu.", images:["images/companytycoon.png"], file:"files/companytycoon.rar", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"NightFall", description:"Modlu Minecraft sunucusu.", images:["images/nightfall.png"], file:"files/nightfall.rar", cardDesc:"Küçük açıklama kartta görünecek."},
-{name:"PlanNet", description:"Görselleri ekranda kitleyebileceğiniz bilgisayar uygulaması.", images:["images/plannet.png"], file:"files/PlanNet.rar", cardDesc:"Küçük açıklama kartta görünecek."}
-];
-
-const projectsList=document.getElementById("projects-list");
-const projectDisplay=document.getElementById("project-display");
-const projectImage=document.getElementById("project-image");
-const projectTitle=document.getElementById("project-title");
-const projectDesc=document.getElementById("project-desc");
-
-let currentProject=null;
-let currentImageIndex=0;
-let selectedCard=null;
-
-// Kartları oluştur
-projects.forEach((proj,index)=>{
-  const card=document.createElement("div");
-  card.className="project-card";
-  card.innerHTML=`<img src="${proj.images[0]}" alt="${proj.name}"><h3>${proj.name}</h3><p>${proj.cardDesc}</p>`;
-  card.onclick=()=>{
-    currentProject=projects[index];
-    currentImageIndex=0;
-    projectImage.src=currentProject.images[currentImageIndex];
-    projectTitle.textContent=currentProject.name;
-    projectDesc.textContent=currentProject.description;
-
-    projectDisplay.style.display="flex";
-    setTimeout(()=>{ projectDisplay.classList.add("active"); },10);
-    projectDisplay.scrollIntoView({behavior:"smooth"});
-
-    if(selectedCard) selectedCard.classList.remove("selected");
-    card.classList.add("selected");
-    selectedCard=card;
-  };
-  projectsList.appendChild(card);
-});
-
-// Project display kapama
-function closeProject(){
-  projectDisplay.classList.remove("active");
-  setTimeout(()=>{ projectDisplay.style.display="none"; },400);
-  if(selectedCard) selectedCard.classList.remove("selected");
-  selectedCard=null;
-}
-
-// Resim geçişleri
-function nextImage(){
-  if(!currentProject) return;
-  currentImageIndex++;
-  if(currentImageIndex>=currentProject.images.length) currentImageIndex=0;
-  projectImage.style.transform='translateX(100%)';
-  setTimeout(()=>{
-    projectImage.src=currentProject.images[currentImageIndex];
-    projectImage.style.transform='translateX(0)';
-  },200);
-}
-
-function prevImage(){
-  if(!currentProject) return;
-  currentImageIndex--;
-  if(currentImageIndex<0) currentImageIndex=currentProject.images.length-1;
-  projectImage.style.transform='translateX(-100%)';
-  setTimeout(()=>{
-    projectImage.src=currentProject.images[currentImageIndex];
-    projectImage.style.transform='translateX(0)';
-  },200);
-}
-
-// Navbar smooth scroll
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href').substring(1);
-    const targetSection = document.getElementById(targetId);
-    if(targetSection){
-      const offset = targetId === "about" ? -100 : -60;
-      const y = targetSection.getBoundingClientRect().top + window.scrollY + offset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
-  });
-});
-</script>
+  <script>
+    // 🔥 Butonlara basınca yumuşak kaydırma + offset ayarı
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if(targetSection){
+          const offset = targetId === "about" ? -100 : -60;
+          const y = targetSection.getBoundingClientRect().top + window.scrollY + offset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
