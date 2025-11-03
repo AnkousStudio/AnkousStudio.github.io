@@ -6,135 +6,158 @@
 <title>Resistance - Ankous Studio</title>
 <link rel="icon" type="image/png" href="logo.png">
 <style>
-body {
-  margin:0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
-  color: white;
-  overflow-x: hidden;
-}
+  body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#0b0c10;
+    color:#c5c6c7;
+    overflow-x:hidden;
+  }
 
-header {
-  display:flex;
-  justify-content: space-between;
-  align-items:center;
-  padding:15px 40px;
-  background: rgba(0,0,0,0.8);
-  position: sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter: blur(10px);
-}
+  header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 40px;
+    background:#1f2833;
+    position:sticky;
+    top:0;
+    z-index:1000;
+  }
+  header img { height:40px; }
+  header h1 { color:#66fcf1; margin-left:10px; font-size:24px; display:inline-block; }
+  nav a { margin-left:25px; text-decoration:none; color:#c5c6c7; font-weight:500; transition:color 0.3s; }
+  nav a:hover { color:#66fcf1; }
 
-header img { height:50px; }
-header h1 { color:#00aaff; margin-left:10px; font-size:24px; }
+  .hero {
+    text-align:center;
+    padding:80px 20px;
+    background:radial-gradient(circle at center, #111, #000);
+  }
+  .hero h2 { font-size:36px; color:#66fcf1; margin-bottom:15px; }
+  .hero p { font-size:18px; opacity:0.8; max-width:700px; margin:0 auto; }
 
-nav a { margin-left:25px; text-decoration:none; color:#fff; font-weight:500; transition:color 0.3s; }
-nav a:hover { color:#00aaff; }
+  .gallery {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin:50px auto;
+    max-width:1000px;
+    gap:20px;
+  }
 
-.main-content { padding:80px 40px; max-width:1200px; margin:0 auto; }
+  .main-image {
+    width:100%;
+    max-width:700px;
+    height:400px;
+    background:#1f2833;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition: transform 0.3s;
+  }
+  .main-image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:15px;
+    transition: transform 0.4s ease;
+  }
+  .main-image:hover { transform:scale(1.03); }
 
-.project-title { font-size:2.5rem; text-align:center; margin-bottom:20px; }
-.project-description { font-size:1.2rem; text-align:center; opacity:0.85; margin-bottom:40px; }
+  .thumbs {
+    display:flex;
+    gap:15px;
+    margin-top:10px;
+    justify-content:center;
+  }
+  .thumb {
+    width:100px;
+    height:70px;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition: all 0.3s;
+  }
+  .thumb img { width:100%; height:100%; object-fit:cover; }
+  .thumb:hover { transform:scale(1.1); border:2px solid #66fcf1; }
 
-.gallery {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:15px;
-}
+  .description {
+    max-width:800px;
+    text-align:center;
+    margin:40px auto;
+    line-height:1.6;
+    font-size:16px;
+  }
 
-.main-image {
-  width:100%;
-  max-width:700px;
-  border-radius:20px;
-  overflow:hidden;
-  cursor:pointer;
-  transition: transform 0.3s;
-}
+  .download-btn {
+    display:inline-block;
+    background:#1f2833;
+    color:#c5c6c7;
+    padding:15px 40px;
+    border-radius:30px;
+    font-size:18px;
+    text-decoration:none;
+    margin-top:20px;
+    transition: all 0.3s ease;
+  }
+  .download-btn:hover {
+    transform:scale(1.1);
+    outline:3px solid #66fcf1;
+    color:#66fcf1;
+  }
 
-.main-image img { width:100%; display:block; }
-.main-image:hover { transform: scale(1.03); }
+  /* Modal */
+  .modal {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.85);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.4s ease;
+  }
+  .modal.active { opacity:1; pointer-events:auto; }
+  .modal-content {
+    position:relative;
+    max-width:90%;
+    max-height:90%;
+    border-radius:15px;
+    overflow:hidden;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    background:#111;
+    padding:20px;
+  }
+  .modal-content img {
+    width:200px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    transition: transform 0.3s;
+  }
+  .modal-content img:hover { transform:scale(1.05); }
+  .modal-close {
+    position:absolute;
+    top:10px; right:10px;
+    font-size:30px;
+    color:#66fcf1;
+    cursor:pointer;
+  }
 
-.thumbnails {
-  display:flex;
-  gap:10px;
-  margin-top:10px;
-  flex-wrap: wrap;
-  justify-content:center;
-}
+  @media(max-width:768px){
+    .main-image { height:250px; }
+    .thumb { width:70px; height:50px; }
+    .modal-content img { width:120px; height:80px; }
+  }
 
-.thumbnails img {
-  width:80px;
-  height:60px;
-  object-fit:cover;
-  border-radius:12px;
-  cursor:pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.thumbnails img:hover { transform: scale(1.1); box-shadow:0 0 15px #00aaff55; }
-
-/* Lightbox / Modal */
-#lightbox {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.9);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  pointer-events:none;
-  transition: opacity 0.3s;
-  z-index:999;
-}
-
-#lightbox.active { opacity:1; pointer-events:auto; }
-
-#lightbox img {
-  max-width:90%;
-  max-height:90%;
-  border-radius:20px;
-}
-
-#close-lightbox {
-  position:absolute;
-  top:30px; right:30px;
-  font-size:40px;
-  color:#00aaff;
-  cursor:pointer;
-  transition: color 0.3s;
-}
-
-#close-lightbox:hover { color:#fff; }
-
-.download-btn {
-  display:block;
-  margin:40px auto 0;
-  padding:15px 40px;
-  background:#00aaff;
-  color:#fff;
-  border-radius:30px;
-  text-decoration:none;
-  font-size:1.2rem;
-  text-align:center;
-  transition: background 0.3s;
-}
-
-.download-btn:hover { background:#0088cc; }
-
-footer {
-  text-align:center;
-  padding:20px;
-  opacity:0.7;
-  font-size:0.9rem;
-  background:#000;
-}
-
-@media(max-width:900px){
-  .thumbnails img { width:60px; height:45px; }
-}
 </style>
 </head>
 <body>
@@ -149,55 +172,64 @@ footer {
   </nav>
 </header>
 
-<div class="main-content">
-  <h2 class="project-title">Resistance</h2>
-  <p class="project-description">2D pixel art mobil oyun. Oyuncular zorlu seviyelerde direnç göstererek ilerlemeye çalışıyor.</p>
+<section class="hero">
+  <h2>Resistance</h2>
+  <p>2D pixel art mobil oyun projemiz.</p>
+</section>
 
-  <div class="gallery">
-    <div class="main-image" id="mainImage">
-      <img src="resistance_main.png" alt="Resistance Ana Görsel">
-    </div>
-    <div class="thumbnails">
-      <img src="resistance_thumb1.png" alt="Thumbnail 1">
-      <img src="resistance_thumb2.png" alt="Thumbnail 2">
-      <img src="resistance_thumb3.png" alt="Thumbnail 3">
-    </div>
+<section class="gallery">
+  <div class="main-image" id="mainImage">
+    <img src="resistance1.png" alt="Resistance">
+  </div>
+  <div class="thumbs">
+    <div class="thumb"><img src="resistance1.png" alt=""></div>
+    <div class="thumb"><img src="resistance2.png" alt=""></div>
+    <div class="thumb"><img src="resistance3.png" alt=""></div>
   </div>
 
-  <a href="files/resistance.rar" download class="download-btn">İndir</a>
-</div>
+  <div class="description">
+    <p>Resistance, 2D pixel art tarzında mobil bir oyundur. Oyuncular farklı seviyelerde düşmanları yenerek ilerler.</p>
+  </div>
 
-<!-- Lightbox -->
-<div id="lightbox">
-  <span id="close-lightbox">&#10006;</span>
-  <img id="lightbox-img" src="" alt="">
-</div>
+  <a class="download-btn" href="files/resistance.rar" download>İndir</a>
+</section>
 
-<footer>
-  © 2025 Ankous Studio
-</footer>
+<!-- Modal -->
+<div class="modal" id="galleryModal">
+  <div class="modal-content" id="modalContent">
+    <span class="modal-close" id="modalClose">&#10006;</span>
+    <img src="resistance1.png" alt="">
+    <img src="resistance2.png" alt="">
+    <img src="resistance3.png" alt="">
+  </div>
+</div>
 
 <script>
-// Lightbox aç/kapat
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const mainImage = document.getElementById("mainImage");
+  // Thumbnail click
+  const mainImage = document.getElementById('mainImage');
+  const thumbs = document.querySelectorAll('.thumb img');
+  const modal = document.getElementById('galleryModal');
+  const modalClose = document.getElementById('modalClose');
 
-mainImage.addEventListener("click", () => {
-  lightbox.classList.add("active");
-  lightboxImg.src = mainImage.querySelector("img").src;
-});
-
-document.getElementById("close-lightbox").addEventListener("click", () => {
-  lightbox.classList.remove("active");
-});
-
-// Thumbnail click
-document.querySelectorAll(".thumbnails img").forEach(thumb => {
-  thumb.addEventListener("click", () => {
-    mainImage.querySelector("img").src = thumb.src;
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      mainImage.querySelector('img').src = thumb.src;
+    });
   });
-});
+
+  // Click on main image to open modal
+  mainImage.addEventListener('click', () => {
+    modal.classList.add('active');
+  });
+
+  // Close modal
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+
+  modal.addEventListener('click', (e)=>{
+    if(e.target === modal) modal.classList.remove('active');
+  });
 </script>
 
 </body>
