@@ -6,7 +6,7 @@
 <title>Ankous Studio</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body { background:#0b0c10; color:#c5c6c7; overflow-x:hidden; scroll-behavior:smooth; }
+body { background:#0b0c10; color:#c5c6c7; overflow-x:hidden; }
 
 header {
   position:sticky;
@@ -126,10 +126,7 @@ nav a:hover { color:#66fcf1; }
 footer { background:#0b0c10; padding:30px; text-align:center; color:#c5c6c7; font-size:14px; }
 footer span { color:#66fcf1; }
 
-@media(max-width:900px){
-  #project-display { flex-direction:column; align-items:center; }
-  .left,.right{ width:90%; }
-}
+@media(max-width:900px){ #project-display { flex-direction:column; align-items:center; } .left,.right{ width:90%; } }
 </style>
 </head>
 <body>
@@ -189,13 +186,13 @@ footer span { color:#66fcf1; }
 
 <script>
 const projects=[
-{name:"Resistance", shortDesc:"2D pixel art mobil oyun.", description:"Direniş temalı heyecan dolu bir 2D pixel art mobil oyun. Farklı bölümler ve karakterlerle dolu!", images:["images/resistance.png"], file:"files/resistance.rar"},
-{name:"Kulyas", shortDesc:"3D korku-gerilim oyunu.", description:"Korku atmosferine sahip karanlık bir 3D gerilim deneyimi. Cesaretini test et!", images:["images/kulyas.png"], file:"files/kulyas.zip"},
-{name:"Codescaper", shortDesc:"3D gizem oyunu.", description:"Kodlar ve bulmacalarla dolu karanlık bir laboratuvardan kaçmaya çalıştığın gizemli bir oyun.", images:["images/codescaper.png"], file:"files/codescaper.rar"},
-{name:"PhoneRun", shortDesc:"3D mobil runner oyunu.", description:"Renkli, hızlı tempolu, reflekslerini test eden eğlenceli bir 3D mobil koşu oyunu.", images:["images/phonerun.png"], file:"files/phonerun.rar"},
-{name:"CompanyTycoon", shortDesc:"Şirket yönetimi simülasyonu.", description:"Kendi şirketini kur, büyüt ve iş dünyasında lider ol! Strateji ve simülasyon bir arada.", images:["images/companytycoon.png"], file:"files/companytycoon.rar"},
-{name:"NightFall", shortDesc:"Minecraft sunucusu.", description:"Korku, keşif ve gizem dolu özel modlu Minecraft sunucusu.", images:["images/nightfall.png"], file:"files/nightfall.rar"},
-{name:"PlanNet", shortDesc:"Görsel sabitleme uygulaması.", description:"Ekrandaki görselleri sabitleyebileceğin, sade ve verimli bir masaüstü uygulaması.", images:["images/plannet.png"], file:"files/PlanNet.rar"}
+{name:"Resistance", description:"2D pixel art mobil oyun.", details:"Zorlu bölümler, güçlü düşmanlar ve özgün oynanış mekanikleriyle Resistance mobil platformlarda heyecan dolu bir deneyim sunuyor.", images:["images/resistance.png"], file:"files/resistance.rar"},
+{name:"Kulyas", description:"3D korku-gerilim oyunu.", details:"Karanlık atmosferi ve gizemli hikayesiyle Kulyas, oyunculara unutulmaz bir korku deneyimi yaşatıyor.", images:["images/kulyas.png"], file:"files/kulyas.zip"},
+{name:"Codescaper", description:"3D puzzle-macera oyunu.", details:"Mantık, beceri ve hızın birleştiği Codescaper’da oyuncular gizemli odalardan kaçmak için bulmacaları çözmek zorunda.", images:["images/codescaper.png"], file:"files/codescaper.rar"},
+{name:"PhoneRun", description:"3D mobil runner oyunu.", details:"Basit ama eğlenceli oynanışıyla PhoneRun, reflekslerinizi sınayan dinamik bir koşu deneyimi sunuyor.", images:["images/phonerun.png"], file:"files/phonerun.rar"},
+{name:"CompanyTycoon", description:"3D mobil şirket simülasyonu.", details:"Kendi şirketinizi yönetin, büyütün ve zirveye taşıyın! Company Tycoon, iş stratejisi meraklıları için birebir.", images:["images/companytycoon.png"], file:"files/companytycoon.rar"},
+{name:"NightFall", description:"Modlu Minecraft sunucusu.", details:"Benzersiz modlar, özel haritalar ve aktif topluluk ile NightFall, klasik Minecraft deneyimini bir üst seviyeye taşıyor.", images:["images/nightfall.png"], file:"files/nightfall.rar"},
+{name:"PlanNet", description:"Görsel sabitleme uygulaması.", details:"Ekrandaki öğeleri sabitleyebileceğiniz hafif ve kullanışlı bir masaüstü aracı.", images:["images/plannet.png"], file:"files/PlanNet.rar"}
 ];
 
 const projectsList=document.getElementById("projects-list");
@@ -209,14 +206,10 @@ let currentProject=null;
 let currentImageIndex=0;
 let selectedCard=null;
 
-// Proje kartlarını oluştur
 projects.forEach((proj,index)=>{
   const card=document.createElement("div");
   card.className="project-card";
-  card.innerHTML=`<img src="${proj.images[0]}" alt="${proj.name}">
-  <h3>${proj.name}</h3>
-  <p>${proj.shortDesc}</p>`;
-  
+  card.innerHTML=`<img src="${proj.images[0]}" alt="${proj.name}"><h3>${proj.name}</h3><p>${proj.description}</p>`;
   card.onclick=()=>{
     showProject(index);
     if(selectedCard) selectedCard.classList.remove("selected");
@@ -231,7 +224,7 @@ function showProject(index){
   currentImageIndex=0;
   projectImage.src=currentProject.images[currentImageIndex];
   projectTitle.textContent=currentProject.name;
-  projectDesc.textContent=currentProject.description;
+  projectDesc.textContent=currentProject.details;
   downloadBtn.href=currentProject.file;
 
   projectDisplay.style.display="flex";
@@ -268,14 +261,14 @@ function prevImage(){
   },200);
 }
 
-// 🔥 Butonlara basınca yumuşak kaydırma + offset ayarı
+// 🔥 Menüdeki butonlara yumuşak kaydırma + offset ayarı
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const targetId = link.getAttribute('href').substring(1);
     const targetSection = document.getElementById(targetId);
     if(targetSection){
-      const offset = targetId === "about" ? -100 : -60;
+      const offset = targetId === "about" ? -120 : -80;
       const y = targetSection.getBoundingClientRect().top + window.scrollY + offset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
