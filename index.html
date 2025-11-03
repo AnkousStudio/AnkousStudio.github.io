@@ -109,9 +109,6 @@ nav a:hover { color:#66fcf1; }
 .description h2 { color:#66fcf1; font-size:32px; margin-bottom:20px; }
 .description p { font-size:16px; line-height:1.6; }
 
-.download-btn { text-decoration:none; background:#45a29e; color:white; padding:15px 35px; border-radius:30px; font-size:18px; text-align:center; display:inline-block; transition:background 0.3s; margin-top:20px; width:fit-content; }
-.download-btn:hover { background:#66fcf1; color:#0b0c10; }
-
 .close-btn { position:absolute; top:0; right:0; font-size:40px; color:#66fcf1; cursor:pointer; background:rgba(11,12,16,0.5); padding:10px; border-radius:50%; transform:translate(50%, -50%); transition:background 0.3s; }
 .close-btn:hover { background:rgba(102,252,241,0.7); }
 
@@ -165,7 +162,6 @@ footer span { color:#66fcf1; }
       <h2 id="project-title"></h2>
       <p id="project-desc"></p>
     </div>
-    <a id="download-btn" class="download-btn" href="#" download>İndir</a>
   </div>
 </div>
 
@@ -202,7 +198,6 @@ const projectDisplay=document.getElementById("project-display");
 const projectImage=document.getElementById("project-image");
 const projectTitle=document.getElementById("project-title");
 const projectDesc=document.getElementById("project-desc");
-const downloadBtn=document.getElementById("download-btn");
 
 let currentProject=null;
 let currentImageIndex=0;
@@ -219,7 +214,6 @@ projects.forEach((proj,index)=>{
     projectImage.src=currentProject.images[currentImageIndex];
     projectTitle.textContent=currentProject.name;
     projectDesc.textContent=currentProject.description;
-    downloadBtn.href=currentProject.file;
 
     projectDisplay.style.display="flex";
     setTimeout(()=>{ projectDisplay.classList.add("active"); },10);
@@ -263,7 +257,7 @@ function prevImage(){
   },200);
 }
 
-//  Butonlara basınca yumuşak kaydırma + offset ayarı
+// Navbar smooth scroll
 document.querySelectorAll('nav a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
