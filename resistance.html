@@ -15,7 +15,7 @@
       overflow-x: hidden;
     }
 
-    /* Üst Menü (Ana Site ile aynı) */
+    /* Üst Menü */
     header {
       display: flex;
       justify-content: space-between;
@@ -87,19 +87,27 @@
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
+      position: relative;
+      overflow: hidden;
     }
 
     .left, .right {
       flex:1;
       min-width: 300px;
+      position: relative;
     }
 
+    /* Görsel alanı */
     .image-box {
       width:100%;
       border-radius:15px;
       overflow:hidden;
-      position:relative;
+      position: relative;
       box-shadow:0 4px 15px rgba(0,0,0,0.5);
+      background: linear-gradient(135deg, #1b2735, #66fcf1 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .image-box img {
@@ -107,6 +115,39 @@
       height:auto;
       display:block;
       border-radius:12px;
+      transition: transform 0.4s;
+    }
+
+    .image-box img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Ok butonları */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: #66fcf1;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 2;
+    }
+
+    .arrow:hover {
+      background: rgba(102,252,241,0.7);
+    }
+
+    .arrow-left {
+      left: 10px;
+    }
+
+    .arrow-right {
+      right: 10px;
     }
 
     .right h2 {
@@ -167,7 +208,9 @@
 <section class="project-display">
   <div class="left">
     <div class="image-box">
-      <img src="images/resistance.png" alt="Resistance">
+      <span class="arrow arrow-left" onclick="prevImage()">&#10094;</span>
+      <img id="project-image" src="images/resistance.png" alt="Resistance">
+      <span class="arrow arrow-right" onclick="nextImage()">&#10095;</span>
     </div>
   </div>
   <div class="right">
@@ -180,6 +223,34 @@
 <footer>
   © 2025 Ankous Studio. Tüm hakları saklıdır.
 </footer>
+
+<script>
+  // Görselleri kaydırmak için örnek
+  const images = ["images/resistance.png"]; // İleride başka görseller ekle
+  let currentIndex = 0;
+
+  const projectImage = document.getElementById("project-image");
+
+  function nextImage() {
+    currentIndex++;
+    if(currentIndex >= images.length) currentIndex = 0;
+    projectImage.style.transform = 'translateX(100%)';
+    setTimeout(() => {
+      projectImage.src = images[currentIndex];
+      projectImage.style.transform = 'translateX(0)';
+    }, 200);
+  }
+
+  function prevImage() {
+    currentIndex--;
+    if(currentIndex < 0) currentIndex = images.length - 1;
+    projectImage.style.transform = 'translateX(-100%)';
+    setTimeout(() => {
+      projectImage.src = images[currentIndex];
+      projectImage.style.transform = 'translateX(0)';
+    }, 200);
+  }
+</script>
 
 </body>
 </html>
