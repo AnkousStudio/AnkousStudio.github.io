@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plannet - Ankous Studio</title>
+<link rel="icon" type="image/png" href="images/logo.png">
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+  color: white;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: rgba(0, 0, 0, 0.8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+header .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+header img { height: 50px; }
+header .logo-text { font-size: 1.5rem; font-weight: bold; color: #00aaff; }
+nav a { margin-left: 25px; text-decoration: none; color: #fff; font-weight: 500; transition: color 0.3s; }
+nav a:hover { color: #00aaff; }
+
+.hero {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: radial-gradient(circle at center, #222 0%, #111 80%);
+  text-align: center;
+}
+.hero h1 { font-size: 3rem; margin-bottom: 15px; color: #66fcf1; }
+.hero p { font-size: 1.2rem; opacity: 0.9; }
+
+.project-display {
+  max-width: 1000px;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  position: relative;
+  align-items: flex-start;
+}
+.left, .right { flex:1; min-width:300px; position: relative; }
+
+/* Görsel alanı */
+.image-box {
+  width:100%;
+  border-radius:15px;
+  overflow:hidden;
+  position: relative;
+  box-shadow:0 4px 15px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:#1f2833;
+  cursor: pointer;
+}
+.image-box img {
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:12px;
+  transition: transform 0.4s;
+}
+.image-box img:hover { transform: scale(1.05); }
+
+/* Thumbnail bar */
+.thumbnail-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+.thumbnail-bar img {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s, border 0.3s;
+  border: 2px solid transparent;
+}
+.thumbnail-bar img:hover {
+  transform: scale(1.1);
+  border: 2px solid #66fcf1;
+}
+
+/* Sağ kısım (açıklama) */
+.right {
+  background: linear-gradient(to bottom, rgba(36,36,36,0.6), rgba(36,36,36,1));
+  padding:20px;
+  border-radius:15px;
+}
+.right h2 { color:#66fcf1; margin-bottom:20px; }
+.right p { line-height:1.6; color:#c5c6c7; }
+.download-btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:15px 35px;
+  background:#181818;
+  color:#c5c6c7;
+  border-radius:30px;
+  font-size:18px;
+  text-decoration:none;
+  transition: all 0.3s;
+}
+.download-btn:hover {
+  transform: scale(1.05);
+  outline:3px solid #66fcf1;
+  color:#66fcf1;
+}
+
+/* Popup */
+#image-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+#image-modal img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+#close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 35px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+#close-btn:hover { color: #66fcf1; }
+
+footer {
+  padding: 20px;
+  text-align: center;
+  background: #000;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-top:50px;
+}
+
+@media(max-width:900px){
+  .project-display { padding: 20px; }
+  .hero { height: 40vh; padding-top: 40px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="images/logo.png" alt="Ankous Studio Logo">
+    <div class="logo-text">Ankous Studio</div>
+  </div>
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Plannet</h1>
+  <p>Masaüstüne görseller ekle, düzenle, şeffaflık ve konum ayarlarını yap!</p>
+</section>
+
+<section class="project-display">
+  <div class="left">
+    <div class="image-box" onclick="openModal()">
+      <img id="project-image" src="images/plannet1.png" alt="Plannet">
+    </div>
+    <div class="thumbnail-bar">
+      <img src="images/plannet1.png" onclick="showImage(0)">
+      <img src="images/plannet2.png" onclick="showImage(1)">
+      <img src="images/plannet3.png" onclick="showImage(2)">
+    </div>
+  </div>
+  <div class="right">
+    <h2>Plannet</h2>
+    <p>Plannet, ekranına kendi istediğin görselleri ekleyip onları tamamen kişisel şekilde düzenleyebileceğin bir uygulamadır.  
+    Görsellerin <b>boyutunu, konumunu ve şeffaflığını</b> ayarlayabilir, ayrıca onların <b>tıklanabilir olup olmadığını</b> kontrol edebilirsin.  
+    Basit ama güçlü arayüzüyle masaüstünü hayalindeki gibi özelleştir!</p>
+    <a href="files/plannet.rar" class="download-btn" download>İndir</a>
+  </div>
+</section>
+
+<!-- Popup Görsel -->
+<div id="image-modal" onclick="closeModal(event)">
+  <span id="close-btn" onclick="closeModal(event)">×</span>
+  <img id="modal-image" src="">
+</div>
+
+<footer>
+  © 2025 Ankous Studio. Tüm hakları saklıdır.
+</footer>
+
+<script>
+const images = [
+  "images/plannet1.png",
+  "images/plannet2.png",
+  "images/plannet3.png"
+];
+let currentIndex = 0;
+const projectImage = document.getElementById("project-image");
+
+function showImage(index){
+  currentIndex = index;
+  projectImage.style.transform = 'scale(0.95)';
+  setTimeout(()=>{
+    projectImage.src = images[currentIndex];
+    projectImage.style.transform = 'scale(1)';
+  },150);
+}
+
+// Modal sistemi
+const modal = document.getElementById("image-modal");
+const modalImg = document.getElementById("modal-image");
+
+function openModal(){
+  modal.style.display = "flex";
+  modalImg.src = projectImage.src;
+}
+
+function closeModal(event){
+  if (event.target === modal || event.target.id === "close-btn") {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
